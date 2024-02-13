@@ -3,11 +3,17 @@ import React from "react";
 
 function App() {
   const [longUrl, setLongUrl] = React.useState("");
+  const [inputUrl, setInputUrl] = React.useState("");
+  const [shortUrl, setShortUrl] = React.useState("");
 
-  const submitLongUrl = (event) => {
+  const submitLongUrl = async (event) => {
     event.preventDefault();
-    const givenUrl = longUrl;
-    setLongUrl("");
+    // const result = axios.post("http://localhost:3000", {
+    //   longUrl: "exampleURL.com",
+    // });
+    // setShortUrl(result.message);
+    setLongUrl(inputUrl);
+    setInputUrl("");
   };
 
   return (
@@ -24,9 +30,9 @@ function App() {
               type="text"
               data-testid="long-url-input"
               placeholder="input long URL here..."
-              value={longUrl}
+              value={inputUrl}
               onChange={(e) => {
-                setLongUrl(e.value);
+                setInputUrl(e.target.value);
               }}
             />
           </label>
@@ -37,9 +43,9 @@ function App() {
       </section>
       <section>
         <h3>Shortened URL</h3>
-        <p data-testid="display-shortend-url"></p>
+        <p data-testid="display-shortened-url">{shortUrl}</p>
         <h3>Original Long URL</h3>
-        <p data-testid="display-long-url"></p>
+        <p data-testid="display-long-url">{longUrl}</p>
       </section>
     </>
   );
